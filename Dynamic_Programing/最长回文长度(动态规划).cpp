@@ -11,6 +11,7 @@
 #include<algorithm>
 using namespace std;
 string a;
+//递归，时间复杂度2^n
 int dp(int i,int j)
 {
 	int res = 0;
@@ -28,6 +29,23 @@ int dp(int i,int j)
 	}
 	return res;
 }
+//递推
+int solve()
+{
+	int len = a.length();
+	vector< vector<int> > dp(len,vector<int> (len) );
+	for(int i = 0; i < len; i++)
+		dp[i][i] = 1;
+	for(int i = 1; i < len; i++)
+		for(int j = 0; j+i < len; j++)
+		{
+			if(a[j] == a[j+i])
+				dp[j][j+i] = dp[j+1][j+i-1] + 2;
+			else
+				dp[j][j+i] = max(dp[j][j+i-1],dp[j+1][j+i]);
+		}
+	return dp[0][len-1];
+ } 
 int main()
 {
 	while(cin >> a)
