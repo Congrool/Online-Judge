@@ -1,5 +1,5 @@
 /*
-约瑟夫问题，用队列解决很高效
+约瑟夫问题，用队列解决效率很高 
 */ 
 #include<iostream>
 #include<memory.h>
