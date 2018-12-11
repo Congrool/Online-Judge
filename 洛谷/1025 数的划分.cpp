@@ -1,5 +1,5 @@
 /*
-递推问题，未优化
+閫掓帹闂锛屾湭浼樺寲
 */
 #include<iostream>
 #include<memory.h>
