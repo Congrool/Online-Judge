@@ -22,7 +22,7 @@ int main(){
 			med.push(comb);
 			int x = comb & -comb;		//求得最低位的1
 			int y = comb + x;			//将1区间置零，并将左侧第一个0置1
-			comb = ((comb & ~y) / x >> 1 ) | y;  //|左侧将连续的1区间右移直到缺少一个1
+			comb = ((comb & ~y) / x >> 1 ) | y;  // 左侧将连续的1区间右移直到缺少一个1
 		}
 		//核心代码end
 		/*
