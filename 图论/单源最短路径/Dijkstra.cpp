@@ -10,14 +10,15 @@
 using namespace std;
 const int MAX_V = 100;
 const int MAX_E = 100;
+const int INF = 0x3f3f3f3f;
 int V,E;
 
 //有待优化的dijkstra算法 O(|V|^2） 
 int d_1[MAX_V];
 bool used_1[MAX_V];
-int cost_1[MAX_V][MAX_E];//cost[v][u]表示边e = (u,v)的权值，不存在用INF表示 
+int cost_1[MAX_V][MAX_V];//cost[v][u]表示边e = (u,v)的权值，不存在用INF表示 
 void dijkstra_1(int s){ //s是起点 
-	fill(d_1,d_1+V,INT_MAX);
+	fill(d_1,d_1+V,INF);
 	fill(used_1,used_1+V,false);
 	d_1[s] = 0;
 	while(true){
@@ -25,7 +26,7 @@ void dijkstra_1(int s){ //s是起点
 		//从尚未使用的顶点中选择一个距离最小的顶点 
 		for(int u = 0; u < V; u++) 
 			if(!used_1[u] && (v == -1 || d_1[u] < d_1[v]))
-				u = v;			
+				v = u;			
 		
 		if(v == -1) break;
 		used_1[v] = true;
@@ -45,15 +46,15 @@ vector<edge> G[MAX_V];
 int d_2[MAX_V];
 void dijkstra_2(int s){
 	priority_queue<P,vector<P>,greater<P> >que; //这里greater 先按first升序，first相等时按second升序 
-	fill(d_2,d_2+V,INT_MAX);
+	fill(d_2,d_2+V,INF);
 	d_2[s] = 0;
 	que.push(P(0,s));
 	
 	while(!que.empty()){
 		P p = que.top();que.pop();
 		int v = p.second;
-		if(d_2[v] < p.first) continue;
-		
+		if(d_2[v] < p.first) continue;  //这行算是优化吧
+		//松弛操作
 		for(int i = 0; i < G[v].size(); i++){
 			edge e = G[v][i];
 			if(d_2[e.to] > d_2[v] + e.cost){

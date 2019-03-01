@@ -33,15 +33,16 @@ void BF_1(int s){
 		}
 	}
 }
-//我觉得这个写法比较优雅 
+//我觉得这个写法比较优雅
+//return true 表示存在负圈 
 bool BF_2(){
 	memset(d,0,sizeof(d));
 	
 	for(int i =0; i < V; i++)
 		for(int j = 0; j < E; j++){
 			edge e = es[j];
-			if(d[e.to] > d[e.from] + d[e.cost]){
-				d[e.to] = d[e.from] + d[e.cost];
+			if(d[e.to] > d[e.from] + e.cost){
+				d[e.to] = d[e.from] + e.cost;
 				if(i == V-1) return true;
 			}
 		}
