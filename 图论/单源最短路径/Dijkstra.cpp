@@ -66,3 +66,4 @@ void dijkstra_2(int s){
 } 
 int main(){
 	
+}

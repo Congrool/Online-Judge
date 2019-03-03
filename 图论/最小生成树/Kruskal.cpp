@@ -1,7 +1,7 @@
 #include<iostream>
 #include<climits> 
 #include<algorithm>
-#include"union_find.h"
+#include"union_find.h"//自己写的并查集
 using namespace std;
 const int MAX_E = 100;
 struct edge{
