@@ -64,6 +64,31 @@ void dijkstra_2(int s){
 		}
 	}	
 } 
+
+//邻接矩阵的优先队列dijkstra
+int G[MAX_V][MAX_V]; //没有边为INF
+int dd[MAX_V];
+void dijkstra_3(int s){
+	priority_queue<P,vector<P>,greater<P> > que;
+	memset(dd,0x3f,sizeof(dd));
+	que.push(P(0,s));
+	dd[s] = 0;
+	while(!que.empty()){
+		P p = que.top();
+		int v = p.second;
+		if(d[v] < p.first) continue;
+		for(int i = 1; i <= n; i++){
+			int u = v,cost = G[v][u];
+			if(G[i][j] == INF)
+				continue;
+			if(d[u] > d[v] + cost){
+				d[u] = d[v] + cost;
+				que.push(P(cost,d[u]));
+			}
+		}
+	}
+}
+
 int main(){
 	
 }
