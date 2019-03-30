@@ -28,10 +28,10 @@ void solve(ll b){ //µ›πÈ«ÛΩ‚
 	b = fz(b);
 	while(b){
 		if(b&1){
-			if(mi == 0 || mi == 2)
+			if(mi == 0)
 				printf("2(%d)",mi);
 			else if(mi == 1)
-				printf("2",mi);
+				printf("2");
 			else{
 				printf("2(");
 				solve(mi);

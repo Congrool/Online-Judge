@@ -33,12 +33,11 @@ int dp(int i,int j)
 int solve()
 {
 	int len = a.length();
-	vector< vector<int> > dp(len,vector<int> (len) );
+	vector<vector<int> > dp(len,vector<int>(len) );
 	for(int i = 0; i < len; i++)
 		dp[i][i] = 1;
 	for(int i = 1; i < len; i++)
-		for(int j = 0; j+i < len; j++)
-		{
+		for(int j = 0; j+i < len; j++){
 			if(a[j] == a[j+i])
 				dp[j][j+i] = dp[j+1][j+i-1] + 2;
 			else

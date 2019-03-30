@@ -1,6 +1,7 @@
 #include<iostream>
 #include<climits>
 #include<memory.h>
+#include<algorithm>
 using namespace std;
 /*
 功能：求最大非严格上升子序列的长度
@@ -13,19 +14,13 @@ s[dp[i]] = min{s[dp[i]],arr[i]}
 则要检索j,满足1<= j <= i-1,且dp[j]最大，然后才能得到新dp[i]的值。
 
 为了优化时间复杂度，减少检索时间，使用数组s，和第二个状态转移方程
-该方程的作用是当遇到一个新元素时，在s中寻找最后一个（也就只有一个）大于等于arr[i]的值的下标（可以使用二分查找，因为可以证明s是严格单调上升的数组），
+该方程的作用是当遇到一个新元素时，在s中寻找最后一个（也就只有一个）小于等于arr[i]的值的下标（可以使用二分查找，因为可以证明s是严格单调上升的数组），
 该下标即新dp[i]的值。(其实是找最后一个小于arr[i]的坐标j，dp[i]的值就是j+1，效果等同于寻找最后一个大于等于arr[i]的坐标）。
 */
 int s[100001];	  //s[dp[i]]记录的是所有长度为dp[i]的子序列的最后一个元素的最小的一个， 即 s[dp[i]] = min{s[dp[i]],arr[i]}
 int arr[100001];
 int dp[100001];   //dp[i] 指以arr[i]结尾的最长子序列的长度
 int num;
-int max(int a, int b) {
-	return a > b ? a : b;
-}
-int min(int a, int b) {
-	return a < b ? a : b;
-}
 int search(int lo, int hi, int aim) {
 	while (lo <= hi) {
 		int mid = lo + (hi - lo) / 2;

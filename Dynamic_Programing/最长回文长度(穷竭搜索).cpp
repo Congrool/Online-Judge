@@ -23,12 +23,10 @@ void dp(string &bei)
 	int len = bei.length();
 	if (len == 1)
 		return;
-	for(int i = 0; i < len; i++)
-	{
+	for(int i = 0; i < len; i++){  //尝试删除第i个元素，检验是否是回文串
 		string b = bei;
 		b.erase(i, 1);
-		if(ishui(b))
-		{
+		if(ishui(b)){
 			if(b.length() > maxl)
 				maxl = b.length();
 		}

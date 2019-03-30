@@ -5,7 +5,7 @@ using namespace std;
 const int MAX_V = 100;
 const int INF = 0x3f3f3f3f;
 int cost[MAX_V][MAX_V]; //cost[u][v]记录e = (u,v)的权值(不存在的情况设成INF) 
-int mincost[MAX_V];		//记录从X出发的边到每个顶点的最小权值 
+int mincost[MAX_V];		//记录从集合X出发的边到每个顶点的最小权值 
 bool used[MAX_V];		//顶点i是否包含再集合X中 
 int V;
 int prim(){

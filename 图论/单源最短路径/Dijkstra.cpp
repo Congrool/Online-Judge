@@ -76,14 +76,14 @@ void dijkstra_3(int s){
 	while(!que.empty()){
 		P p = que.top();
 		int v = p.second;
-		if(d[v] < p.first) continue;
+		if(dd[v] < p.first) continue;
 		for(int i = 1; i <= n; i++){
 			int u = v,cost = G[v][u];
 			if(G[i][j] == INF)
 				continue;
-			if(d[u] > d[v] + cost){
-				d[u] = d[v] + cost;
-				que.push(P(cost,d[u]));
+			if(dd[u] > dd[v] + cost){
+				dd[u] = dd[v] + cost;
+				que.push(P(cost,dd[u]));
 			}
 		}
 	}
