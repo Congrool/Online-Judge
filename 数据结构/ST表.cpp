@@ -11,6 +11,7 @@
 #include<cstdlib>
 #include<cassert>
 #include<ctime>
+using namespace std;
 using LL = long long;
 //主要代码
 const int MAXN = 1000;
@@ -20,7 +21,7 @@ struct RMQ{
     void init(int *v,int n){
         for(int i = 0; i < n; i++) f[i][0] = v[i];
         int len = highbit(n);
-        for(int j = 1; j < len; j++){
+        for(int j = 1; j <= len; j++){
             int t = n-(1<<j)+1;
             for(int i = 0; i < t; i++)
                 f[i][j] = min(f[i][j-1],f[i+(1<<(j-1))][j-1]);
