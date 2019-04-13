@@ -7,7 +7,7 @@ const int INF = 0x3f3f3f3f;
 const int MAXN = 5010;
 bool vis[MAXN];
 int lowc[MAXN];
-int cost[MAXN][MAXN];
+int cost[MAXN][MAXN]; //顶点从0-n-1
 int n,m;
 int Prim(){
     int ans = 0;
