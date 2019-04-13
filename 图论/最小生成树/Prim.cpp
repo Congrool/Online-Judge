@@ -1,33 +1,48 @@
 #include<iostream>
 #include<climits> 
 #include<algorithm>
+#include<memory.h>
 using namespace std;
-const int MAX_V = 100;
 const int INF = 0x3f3f3f3f;
-int cost[MAX_V][MAX_V]; //cost[u][v]记录e = (u,v)的权值(不存在的情况设成INF) 
-int mincost[MAX_V];		//记录从集合X出发的边到每个顶点的最小权值 
-bool used[MAX_V];		//顶点i是否包含再集合X中 
-int V;
-int prim(){
-	fill(mincost,mincost+V,INF);
-	fill(used,used+V,false);
-	mincost[0] = 0;
-	int res = 0;
-	
-	while(true){
-		int v = -1;
-		for(int u = 0; u < V; u++){
-			if(!used[u] && (v == -1 || mincost[u] < mincost[v])) 
-				v = u;
-		}
-		if(v == -1) break;
-		used[v] = true;
-		res += mincost[v];
-		for(int u = 0; u < V; u++)
-			mincost[u] = min(mincost[u],cost[v][u]);
-		return res;
-	}
+const int MAXN = 5010;
+bool vis[MAXN];
+int lowc[MAXN];
+int cost[MAXN][MAXN];
+int n,m;
+int Prim(){
+    int ans = 0;
+    memset(vis,false,sizeof(vis));
+    vis[0]=true;
+    int minc,p;
+    for(int i = 1; i < n; i++) lowc[i]=cost[0][i];
+    for(int i = 1; i < n; i++){
+        minc = INF;
+        p = -1;
+        for(int j = 0; j < n; j++){
+            if(!vis[j] && minc>lowc[j]){
+                minc = lowc[j];
+                p = j;
+            }
+        }
+        if(minc == INF) return -1;
+        ans+=minc;
+        vis[p] = true;
+        for(int j = 0;j < n; j++)
+            if(!vis[j]&&lowc[j]>cost[p][j])
+                lowc[j] = cost[p][j];
+    }
+    return ans;
 }
-int main() {
-	
+int main(){
+    int m;
+    cin >> n >> m;
+    int u,v,c;
+    memset(cost,0x3f,sizeof(cost));
+    for(int i = 0; i < m; i++){
+        scanf("%d%d%d",&u,&v,&c);
+        cost[u-1][v-1] = min(cost[u-1][v-1],c); //处理重边
+        cost[v-1][u-1] = cost[u-1][v-1];
+    }
+    int ans = Prim();
+    cout << ans << endl;
 }
