@@ -18,13 +18,17 @@ int Kruskal(){
 					//并查集保存连通分量，如果新的边与该边有相同的根，一定会产生回路 
 	uf.init(V); 
 	int res = 0;
+	int cnt = 0;
 	for(int i = 0; i < E; i++){
 		edge e = es[i];
 		if(!uf.same(e.u,e.v)){
 			uf.unite(e.u,e.v);
 			res += e.cost;
+			cnt++;
 		}
+		if(cnt == n-1) break;
 	}
+	if(cnt < n-1) return -1;
 	return res;
 }
 int main() {
