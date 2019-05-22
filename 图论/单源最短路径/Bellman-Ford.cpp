@@ -22,15 +22,15 @@ void BF_1(int s){
 	}
 	d[s] = 0;
 	while(true){
-		bool update = true;
+		bool update = false;
 		for(int i = 0; i< E; i++){
 			edge e = es[i];
 			if(d[e.from] != INT_MAX && d[e.to] > d[e.from] + e.cost){
 				d[e.to] = d[e.from] + e.cost;
 				update = true;
 			}
-			if(!update) break;
 		}
+		if(!update) break;
 	}
 }
 //我觉得这个写法比较优雅
