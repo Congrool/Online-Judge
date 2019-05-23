@@ -13,10 +13,8 @@ int ExtendGCD(int a,int b,int &x, int &y)
 		y = 0;
 		return a;
 	}
-	int r = ExtendGCD(b,a%b,x,y);
-	int t = x;
-	x = y;
-	y = t-(a/b)*y;
+	int r = ExtendGCD(b,a%b,y,x);
+	y -= (a/b)*x;
 	return r;
 }
 int main()
